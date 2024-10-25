@@ -109,9 +109,11 @@ int main() {
     // Make the window's context current
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
+
     // Enable depth testing
     glEnable(GL_DEPTH_TEST);
 
+    utils::Vector3 offset = utils::Vector3();
     // Main loop
     while (!glfwWindowShouldClose(window)) {
 
@@ -151,12 +153,12 @@ int main() {
         rotation2 += newrotation2; 
 
 
-        utils::Vector3 offset = utils::Vector3();
+        
         offset.x = 0;
         offset.y = 0;
-        offset.z = -5;
+        offset.z = 0;
 
-        drawi.drawpyramid(-0.125,0.7,0.9,offset);
+        drawi.drawpyramid(0,1,1,offset);
         drawi.drawcube(0.5, -0.5, 0.5, -0.5, 0.5, -0.5,offset);
         drawi.drawprism(0.5, -0.5, 0.5, -0.5, 0.5, -0.5,offset);
 

@@ -1,4 +1,2 @@
 ﻿  Aplication.cpp
-C:\Users\kayab\OneDrive\Desktop\cpp\opengl\opengl\src\Aplication.cpp(159,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\kayab\OneDrive\Desktop\cpp\opengl\opengl\src\Aplication.cpp(159,34): warning C4305: 'argument': truncation from 'double' to 'float'
   opengl.vcxproj -> C:\Users\kayab\OneDrive\Desktop\cpp\opengl\x64\Debug\opengl.exe

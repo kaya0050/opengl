@@ -7,7 +7,7 @@ class drawing {
 
 
 public:
-    int drawcube(float R, float L, float U, float D, float F, float B,utils::Vector3 offset) {
+    int drawcube(float R, float L, float U, float D, float F, float B, utils::Vector3 offset) {
 
         R += offset.x;
         L += offset.x;
@@ -102,7 +102,7 @@ public:
         return(0);
     }
 
-    int drawprism(float R, float L, float U, float D, float F, float B,utils::Vector3 offset) {
+    int drawprism(float R, float L, float U, float D, float F, float B, utils::Vector3 offset) {
         R += offset.x;
         L += offset.x;
 
