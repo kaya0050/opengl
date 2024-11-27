@@ -136,7 +136,12 @@
     <ClCompile Include="src\Aplication.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\classes\entityobject.h" />
+    <ClInclude Include="src\classes\filehandler.h" />
+    <ClInclude Include="src\classes\physics.h" />
     <ClInclude Include="src\classes\drawing.h" />
+    <ClInclude Include="src\classes\input.h" />
+    <ClInclude Include="src\classes\stb_image.h" />
     <ClInclude Include="src\classes\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

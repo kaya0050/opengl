@@ -1,2 +1,6 @@
 ﻿  Aplication.cpp
+C:\Users\kayab\OneDrive\Desktop\cpp\opengl\opengl\src\classes\filehandler.h(122,20): warning C4101: 'vecie': unreferenced local variable
+  (compiling source file 'src/Aplication.cpp')
+  
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   opengl.vcxproj -> C:\Users\kayab\OneDrive\Desktop\cpp\opengl\x64\Debug\opengl.exe

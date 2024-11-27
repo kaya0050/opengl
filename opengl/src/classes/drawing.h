@@ -3,10 +3,19 @@
 #include "utils.h"
 #include <iostream>
 #include <cmath>
+#include <vector>
+#pragma region myscripts
+#include "filehandler.h"
+#pragma endregion
+
+#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
+filehandler fh;
 class drawing {
 
-
 public:
+    int filecounter;
+
     int drawcube(float R, float L, float U, float D, float F, float B, utils::Vector3 offset) {
 
         R += offset.x;
@@ -97,7 +106,6 @@ public:
         glVertex3f(0 + offset.x, 0 + offset.y, width + offset.z);
         glVertex3f(0 + offset.x, height + offset.y, center + offset.z);
 
-
         glEnd();
         return(0);
     }
@@ -153,6 +161,31 @@ public:
         return(0);
     }
 
+    int drawfromfile(utils::Vector3 offset) {
+        if (fh.points.size() % 9 != 0) {
+            cerr << "ongeldig aantal punten" << endl;
+            return 0;
+        }
 
+        glBegin(GL_TRIANGLES);
+        for (size_t i = 0; i < fh.points.size(); i += 9) {
+            
+
+            glColor3f(10, 0, 0); 
+            glVertex3f(stof(fh.points[i]) + offset.x, stof(fh.points[i + 1]) + offset.y, stof(fh.points[i + 2]) + offset.z);
+
+
+            glColor3f(0, 1, 0); 
+            glVertex3f(stof(fh.points[i + 3]) + offset.x, stof(fh.points[i + 4]) + offset.y, stof(fh.points[i + 5]) + offset.z);
+
+
+            glColor3f(0, 0, 1); 
+            glVertex3f(stof(fh.points[i + 6]) + offset.x, stof(fh.points[i + 7]) + offset.y, stof(fh.points[i + 8]) + offset.z);
+
+
+        }
+        glEnd();
+
+        return 0;
+    }
 };
-
