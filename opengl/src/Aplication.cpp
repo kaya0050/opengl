@@ -7,6 +7,7 @@
 #include "classes/physics.h"
 #include "classes/filehandler.h"
 #include "classes/entityobject.h"
+
 #pragma endregion
 
 float newrotation = 0.0f;
@@ -23,6 +24,9 @@ physics phy;
 filehandler files;
 
 utils::Vector3 entitypos;
+
+
+
 
 // Function to handle errors
 void errorCallback(int error, const char* description) {
@@ -85,10 +89,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 
     if (key == GLFW_KEY_X && action == GLFW_REPEAT || key == GLFW_KEY_X && action == GLFW_PRESS) {
-        newposud = -0.005f;
+        newposud = -0.05f;
     }
     else if (key == GLFW_KEY_Z && action == GLFW_REPEAT || key == GLFW_KEY_Z && action == GLFW_PRESS) {
-        newposud = 0.005f;
+        newposud = 0.05f;
     }
     else
     {
@@ -96,6 +100,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
  
 }
+
+
 
 int main() {
     // Initialize GLFW
@@ -120,25 +126,41 @@ int main() {
     // Enable depth testing
     glEnable(GL_DEPTH_TEST);
 
-    std::vector<utils::Vector3> offsets(1000);
-    for (int i = 0; i < 1000; i++) {
-        offsets[i].x = uti.randomFloat(-50.0f, 50.0f);
-        offsets[i].y = uti.randomFloat(-50.0f, 50.0f);
-        offsets[i].z = uti.randomFloat(-50.0f, 50.0f);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
+    glFrontFace(GL_CCW);
+    
+    std::vector<utils::Vector3> offsets(100);
+    for (int i = 0; i < 100; i++) {
+        offsets[i].x = uti.randomFloat(-5.0f, 5.0f);
+        offsets[i].y = uti.randomFloat(-5.0f, 5.0f);
+        offsets[i].z = uti.randomFloat(-5.0f, 5.0f);
     }
+    
+    
     std::vector<utils::Vector3> offsetsphy(2);
-
     for (int i = 0; i < 2; i++) {
         offsetsphy[i].x = uti.randomFloat(-10, 10);
         offsetsphy[i].y = uti.randomFloat(-10, 10);
         offsetsphy[i].z = uti.randomFloat(-10, 10);
     }
+
+    std::vector<utils::Vector3> newpoints = phy.calculatePoints(offsets);
+    //newpoints = phy.calculatePoints(offsets);
+
     //fh.writefile();
+
+
+
+
+
     
     entityobject entity(entitypos);
+    entity.usebackculling = false;
 
     fh.readline("3dmodel.txt");
     //Main loop
+
     while (!glfwWindowShouldClose(window)) 
     {
         
@@ -176,22 +198,22 @@ int main() {
 
         entitypos.x += 000.1f;
 
-        //rotation += 0.001f;
-        //rotation2 += 0.001f;
-        //phy.Update(offsetsphy);
+        //rotation += 0.01f;
+        //rotation2 += 0.01f;
+        
 
-        drawi.drawcube(0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, offsetsphy[0]);
-        drawi.drawcube(0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, offsetsphy[1]);
+        //drawi.drawcube(0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, offsetsphy[0]);
+        //drawi.drawcube(0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, offsetsphy[1]);
 
         drawi.drawfromfile(offsets[0]);
 
- 
+        
 
         entity.drawentity();
-
-        for (const auto& offset : offsets) {
-            drawi.drawcube(0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, offset);
-        }
+        
+        //for (const auto& offset : newpoints) {
+        //    drawi.drawcube(0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, offset);
+        //}
         
 
         //drawi.drawpyramid(0,1,1,offset);
@@ -200,8 +222,6 @@ int main() {
         //drawi.drawprism(0.5, -0.5, 0.5, -0.5, 0.5, -0.5,offset);
         glfwSwapBuffers(window);
 
-
-        
     }
 
     glfwDestroyWindow(window);

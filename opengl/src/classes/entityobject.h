@@ -1,4 +1,3 @@
-#pragma once
 #pragma region myscripts
 #include "drawing.h"
 #include "utils.h"
@@ -13,11 +12,22 @@ public:
 	utils::Vector3 position;
 	int size = 1;
 	bool alive = true;
+	bool usebackculling = false;
 	void drawentity() {
+
+		if (usebackculling) {
+			
+			drawen.drawfromfile(position);
+		}
+		else
+		{
+			glDisable(GL_CULL_FACE);
+			drawen.drawfromfile(position);
+			glEnable(GL_CULL_FACE);
+		}
 		
-		glRotatef(0.0001f, 0.0f, 0.1f, 0.0f);
-		glRotatef(0.0001f, 0.1f, 0.0f, 0.0f);
-		drawen.drawfromfile(position);
+		//drawen.drawfromfile(position);
+		
 	}
 	entityobject(utils::Vector3 position) {
 
